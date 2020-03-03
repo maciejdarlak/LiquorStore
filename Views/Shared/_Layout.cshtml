@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<!--Lenguage declaration-->
+<html lang="en">
+
+<!--Invissible part-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href>
+    <style>
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* The navigation menu - dropdowns buttons */
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            /* Navigation links - Home, Contact buttons */
+            .navbar a {
+                float: left;
+                font-size: 16px;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+        /* The subnavigation menu */
+        .subnav {
+            float: left;
+            overflow: hidden;
+        }
+
+            /* Subnav button - dropdowns buttons */
+            .subnav .subnavbtn {
+                font-size: 16px;
+                border: none;
+                outline: none;
+                color: white;
+                padding: 14px 16px;
+                background-color: inherit;
+                font-family: inherit;
+                margin: 0;
+            }
+
+            /* Add a red background color to navigation links on hover */
+            .navbar a:hover, .subnav:hover .subnavbtn {
+                background-color: grey;
+            }
+
+        /* Style the subnav content - positioned absolute */
+        .subnav-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            background-color: grey;
+            width: 100%;
+            z-index: 1;
+        }
+
+            /* Style the subnav links - subbuttons color NOT marked with the mouse*/
+            .subnav-content a {
+                float: left;
+                color: white;
+                text-decoration: none;
+            }
+
+                /* Add a background color on hover - subbuttons color marked with the mouse */
+                .subnav-content a:hover {
+                    background-color: #eee;
+                    color: black;
+                }
+
+        /* When you move the mouse over the subnav container, open the subnav content */
+        .subnav:hover .subnav-content {
+            display: block;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="navbar">
+
+        <a href="#home">Home</a>
+
+        <div class="subnav">
+            <button class="subnavbtn">SPIRITS <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                <a href="#company">Scotch</a>
+                <a href="#team">Bourbon</a>
+                <a href="#careers">Whiskey</a>
+            </div>
+        </div>
+
+        <div class="subnav">
+            <button class="subnavbtn">WINE <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                <a href="#">Red Wine</a>
+                <a href="#">White Wine</a>
+                <a href="#">Rose Wine</a>
+            </div>
+        </div>
+
+        <div class="subnav">
+            <button class="subnavbtn">BEER <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                <a href="#">Dark</a>
+                <a href="#">Bright</a>
+            </div>
+        </div>
+
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+</body>
+</html>
