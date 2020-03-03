@@ -12,6 +12,5 @@ ASP.NET.Core 3.0
 ## Frameworks & Dependencies
 - Entity Framework Core
 - ASP.NET Core
-- Razor Pages
 - Bootstrap
 - .NET tag helpers
