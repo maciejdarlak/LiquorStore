@@ -9,11 +9,11 @@ namespace LiquorStore.Controllers
 {
     public class AdminController : Controller
     {
-        public ProductContext _bottleContext;
+        public ProductContext _productContext;
 
-        public AdminController(ProductContext bottleContext)
+        public AdminController(ProductContext productContext)
         {
-            _bottleContext = bottleContext;
+            _productContext = productContext;
         }
 
         public ViewResult Index()
