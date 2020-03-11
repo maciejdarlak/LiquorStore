@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LiquorStore.Data;
+using LiquorStore.Models;
 
 namespace LiquorStore.Controllers
 {
@@ -20,5 +21,26 @@ namespace LiquorStore.Controllers
         {
             return View();
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("Id, Name, Category, SubCategory, ProductionYear, Price")] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _productContext.Add(product);
+                _productContext.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(product);
+        }
+
+
+
     }
 }
