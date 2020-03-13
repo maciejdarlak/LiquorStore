@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LiquorStore.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace LiquorStore.Controllers
 {
@@ -16,9 +18,9 @@ namespace LiquorStore.Controllers
             _productContext = productContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> List()
         {
-            return View();
+            return View(await _productContext.Product.ToListAsync());
         }
     }
 }

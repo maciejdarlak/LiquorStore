@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LiquorStore.Data;
 using LiquorStore.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace LiquorStore.Controllers
 {
@@ -17,9 +19,9 @@ namespace LiquorStore.Controllers
             _productContext = productContext;
         }
 
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
         {
-            return View();
+            return View(await _productContext.Product.ToListAsync());
         }
 
         public ActionResult Create()
@@ -29,12 +31,12 @@ namespace LiquorStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id, Name, Category, SubCategory, ProductionYear, Price")] Product product)
+        public async Task<IActionResult> Create([Bind("Id, Name, Category, SubCategory, Volume, ProductionYear, Price")] Product product)
         {
             if (ModelState.IsValid)
             {
                 _productContext.Add(product);
-                _productContext.SaveChanges();
+                await _productContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
