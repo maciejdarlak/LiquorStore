@@ -24,10 +24,29 @@ namespace LiquorStore.Controllers
             return View(await _productContext.Product.ToListAsync());
         }
 
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _productContext.Product.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
+
+
         public ActionResult Create()
         {
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -41,6 +60,7 @@ namespace LiquorStore.Controllers
             }
             return View(product);
         }
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -58,6 +78,7 @@ namespace LiquorStore.Controllers
 
             return View(product);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
