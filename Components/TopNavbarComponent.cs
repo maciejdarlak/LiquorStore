@@ -16,10 +16,10 @@ namespace LiquorStore.ViewComponents
             _productContext = productContext;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var categories = _productContext.Product.Select(x => x.Category).Distinct().OrderBy(x => x);
-            return View(categories);
+            var subCategories = _productContext.Product.Select(x => x.SubCategory).Distinct().OrderBy(x => x).ToList();
+            return View(subCategories);
         }
     }
 }
