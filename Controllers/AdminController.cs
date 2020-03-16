@@ -42,7 +42,53 @@ namespace LiquorStore.Controllers
             return View(product);
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var product = await _productContext.Product.FirstOrDefaultAsync(x => x.Id == id);  
+
+            if(product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int Id, [Bind("Id, Name, Category, SubCategory, Volume, ProductionYear, Price")] Product product)
+        {
+            if (Id != product.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _productContext.Update(product);
+                    await _productContext.SaveChangesAsync();
+                }
+                catch(DbUpdateConcurrencyException)
+                {
+                    if (!_productContext.Product.Any(x => x.Id == Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                        throw;
+                }
+               
+                return RedirectToAction(nameof(Index));
+            }
+            return View(product);
+        }
 
     }
 }
