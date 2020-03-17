@@ -111,5 +111,33 @@ namespace LiquorStore.Controllers
             return View(product);
         }
 
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _productContext.Product.FirstOrDefaultAsync();
+
+            if (id != product.Id)
+            {
+                return NotFound();
+            }
+
+            return View();
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var product = await _productContext.Product.FindAsync(id);
+            _productContext.Product.Remove(product);
+            await _productContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
