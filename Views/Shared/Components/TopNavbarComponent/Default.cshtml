@@ -6,6 +6,7 @@
         <a asp-controller="Product" asp-action="List"
            class="dropdown-toggle" data-toggle="dropdown">@a.Category<b class="caret"></b></a>
         <ul class="dropdown-menu">
+
             @foreach (var b in a.SubCategory)
             {
                 <li>
