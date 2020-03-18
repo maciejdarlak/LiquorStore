@@ -1,39 +1,20 @@
-﻿<li class="dropdown">
-    <a asp-controller="Product" asp-action="List"
-        class="dropdown-toggle" data-toggle="dropdown">Spirits<b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        @foreach (var x in Model)
-        {
-            <li>
-                <a asp-controller="Product" asp-action="List" asp-route-x="x.SubCategory">@x</a>
-            </li>
-        }
-    </ul>
-</li>
+﻿@model IEnumerable<LiquorStore.Models.Product>
 
 <li class="dropdown">
-    <a asp-controller="Product" asp-action="List"
-       class="dropdown-toggle" data-toggle="dropdown">Wines<b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        @foreach (var x in Model)
-        {
-            <li>
-                <a asp-controller="Product" asp-action="List" asp-route-x="x.SubCategory">@x</a>
-            </li>
-        }
-    </ul>
+    @foreach (var a in Model)
+    {
+        <a asp-controller="Product" asp-action="List"
+           class="dropdown-toggle" data-toggle="dropdown">@a.Category<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            @foreach (var b in a.SubCategory)
+            {
+                <li>
+                    <a asp-controller="Product" asp-action="List">@b</a>
+                </li>
+            }
+        </ul>
+    }
 </li>
 
-<li class="dropdown">
-    <a asp-controller="Product" asp-action="List"
-       class="dropdown-toggle" data-toggle="dropdown">Beers<b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        @foreach (var x in Model)
-        {
-            <li>
-                <a asp-controller="Product" asp-action="List" asp-route-x="x.SubCategory">@x</a>
-            </li>
-        }
-    </ul>
-</li>
+
 

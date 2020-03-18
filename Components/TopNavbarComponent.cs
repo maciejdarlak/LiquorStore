@@ -18,8 +18,8 @@ namespace LiquorStore.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var subCategories = _productContext.Product.Select(x => x.SubCategory).Distinct().OrderBy(x => x).ToList();
-            return View(subCategories);
+            var menu = _productContext.Product.Select(x => x).ToList();
+            return View(menu);   
         }
     }
 }
