@@ -16,9 +16,10 @@ namespace LiquorStore.ViewComponents
             _productContext = productContext;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public IViewComponentResult Invoke()
         {
-            var menu = _productContext.Product.Select(x => x).ToList();
+            var menu = _productContext.Product.GroupBy(item => new { category = item.Category, subcategory = item.SubCategory }). 
+                                               Select(group => new { category2 = group.Key.category, subcategory2 = group.Key.subcategory, Count = group.Count() });
             return View(menu);   
         }
     }
