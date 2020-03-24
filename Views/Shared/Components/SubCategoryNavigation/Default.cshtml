@@ -1,0 +1,12 @@
+﻿@model IEnumerable<LiquorStore.Models.Product>
+
+
+@foreach (var b in Model)
+{
+    <a asp-controller="Product" asp-action="List" asp-route-b="@b.SubCategory" class="dropdown-toggle" data-toggle="dropdown">
+        @b.SubCategory<b class="caret"></b>
+    </a>
+}
+
+
+

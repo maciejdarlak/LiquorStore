@@ -1,0 +1,14 @@
+﻿@model IEnumerable<LiquorStore.Models.Product>
+
+<li class="dropdown">
+    @foreach (var a in Model)
+    {
+        <a asp-controller="Product" asp-action="List" asp-route-a="@a.Category"
+           class="dropdown-toggle" data-toggle="dropdown">@a.Category<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            @await Component.InvokeAsync("SubCategoryNavigation")
+        </ul>
+    }
+</li>
+
+
