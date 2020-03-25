@@ -1,7 +1,7 @@
 ﻿@foreach (var subcategory in Model)
 {
-    <a asp-controller="Product" asp-action="List" asp-route-subcategory="@subcategory.SubCategory" class="dropdown-toggle" data-toggle="dropdown">
-        @subcategory.SubCategory
+    <a asp-controller="Product" asp-action="List" asp-route-subcategory="@subcategory" class="dropdown-toggle" data-toggle="dropdown">
+        @subcategory
     </a>
 }
 
