@@ -19,8 +19,8 @@ namespace LiquorStore.Components
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var subcategory = await _productContext.Product.OrderBy(x => x.SubCategory).Distinct().ToListAsync();
-            return View(subcategory);
+                var subcategories = await _productContext.Product.OrderBy(x => x.SubCategory).Where(x => x.Category == "Spirits").ToListAsync();
+                return View(subcategories);           
         }
     }
 }
