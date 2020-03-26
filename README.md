@@ -16,4 +16,4 @@ ASP.NET.Core 3.0
 - .NET tag helpers
 
 
-![Home](Home.jpg)
+![nopCommerce demo](https://www.nopcommerce.com/images/features/responsive_devices_codeplex.jpg)
