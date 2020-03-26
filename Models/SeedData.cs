@@ -41,6 +41,16 @@ namespace LiquorStore.Models
                             Volume = 750,
                             ProductionYear = 2008,
                             Price = 108,
+                        },
+
+                        new Product
+                        {
+                            Name = "El Sol",
+                            Category = "Wines",
+                            SubCategory = "Red Wine",
+                            Volume = 750,
+                            ProductionYear = 2018,
+                            Price = 10,
                         }
                     );
 
