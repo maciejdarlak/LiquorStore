@@ -16,4 +16,5 @@ ASP.NET.Core 3.0
 - .NET tag helpers
 
 
-![nopCommerce demo](https://www.nopcommerce.com/images/features/responsive_devices_codeplex.jpg)
+
+![Home]                 (https://github.com/maciejdarlak/LiquorStore/blob/master/Home.pdf)
