@@ -32,7 +32,8 @@ namespace LiquorStore.Controllers
                 .OrderBy(p => p.Id)
                 .Where(p => subcategory == null || p.SubCategory == subcategory),
                 CurrentCategory = subcategory
-            };           
+            };   
+            
             return View(model);
         }
     }
