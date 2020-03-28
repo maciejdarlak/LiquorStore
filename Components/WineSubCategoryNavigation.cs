@@ -9,17 +9,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LiquorStore.Components
 {
-    public class WinesSubCategoryNavigation : ViewComponent
+    public class WineSubCategoryNavigation : ViewComponent
     {
-        private ProductContext _productContext;
-        public WinesSubCategoryNavigation(ProductContext productContext)
+        private ProductContext _context;
+        public WineSubCategoryNavigation(ProductContext context)
         {
-            _productContext = productContext;
+            _context = context;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var subcategories = await _productContext.Product.Where(x => x.Category == "Wines").Select(x => x.SubCategory).Distinct().ToListAsync();
+            var subcategories = await _context.Product.Where(x => x.Category == "Wine").Select(x => x.SubCategory).Distinct().ToListAsync();
             return View(subcategories);
         }
     }

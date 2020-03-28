@@ -11,15 +11,15 @@ namespace LiquorStore.Components
 {
     public class SpiritsSubCategoryNavigation : ViewComponent
     {
-        private ProductContext _productContext;
-        public SpiritsSubCategoryNavigation(ProductContext productContext)
+        private ProductContext _context;
+        public SpiritsSubCategoryNavigation(ProductContext context)
         {
-            _productContext = productContext;
+            _context = context;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-                var subcategories = await _productContext.Product.Where(x => x.Category == "Spirits").Select(x => x.SubCategory).Distinct().ToListAsync();
+                var subcategories = await _context.Product.Where(x => x.Category == "Spirits").Select(x => x.SubCategory).Distinct().ToListAsync();
                 return View(subcategories);           
         }
     }

@@ -19,21 +19,24 @@
                             <a asp-controller="Home" asp-action="Home" class="navbar-brand"> Home </a>
                             <a asp-controller="Home" asp-action="Contact" class="navbar-brand"> Contact </a>
                             <li class="dropdown">
-                                <a asp-controller="Product" asp-action="List" class="navbar-brand dropdown-toggle" data-toggle="dropdown">Spirits<b class="caret"></b></a>
+                                <a asp-controller="Product" asp-action="List" 
+                                   class="navbar-brand dropdown-toggle" data-toggle="dropdown">Spirits<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a>@await Component.InvokeAsync("SpiritsSubCategoryNavigation")</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a asp-controller="Product" asp-action="List" class="navbar-brand dropdown-toggle" data-toggle="dropdown">Wines<b class="caret"></b></a>
+                                <a asp-controller="Product" asp-action="List" 
+                                   class="navbar-brand dropdown-toggle" data-toggle="dropdown">Wine<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a>@await Component.InvokeAsync("WinesSubCategoryNavigation")</a></li>
+                                    <li><a>@await Component.InvokeAsync("WineSubCategoryNavigation")</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a asp-controller="Product" asp-action="List" class="navbar-brand dropdown-toggle" data-toggle="dropdown">Beers<b class="caret"></b></a>
+                                <a asp-controller="Product" asp-action="List" 
+                                   class="navbar-brand dropdown-toggle" data-toggle="dropdown">Beer<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a>@await Component.InvokeAsync("BeersSubCategoryNavigation")</a></li>
+                                    <li><a>@await Component.InvokeAsync("BeerSubCategoryNavigation")</a></li>
                                 </ul>
                             </li>
                         </ul>
