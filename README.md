@@ -14,3 +14,6 @@ ASP.NET.Core 3.0
 - ASP.NET Core
 - Bootstrap
 - .NET tag helpers
+
+
+![Home](https://github.com/maciejdarlak/LiquorStore/blob/master/Home.jpg)
