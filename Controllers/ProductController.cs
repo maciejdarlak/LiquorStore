@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LiquorStore.Models;
 
 
+
 namespace LiquorStore.Controllers
 {
     public class ProductController : Controller
@@ -19,21 +20,9 @@ namespace LiquorStore.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string subcategory)
         {
-            return View(await _context.Product.ToListAsync());
-        }
-
-        public async Task<IActionResult> SelectedProductsList(string subcategory)
-        {
-            ProductListViewModel model = new ProductListViewModel()
-            {
-                Products = _context.Product
-                .OrderBy(p => p.Id)
-                .Where(p => subcategory == null || p.SubCategory == subcategory),
-                CurrentCategory = subcategory
-            };   
-            
+            var model = await _context.Product.OrderBy(p => p.Id).Where(p => subcategory == null || p.SubCategory == subcategory).ToListAsync();                  
             return View(model);
         }
     }
