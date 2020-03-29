@@ -16,4 +16,4 @@ ASP.NET.Core 3.0
 - .NET tag helpers
 
 
-![Home](https://github.com/maciejdarlak/LiquorStore/blob/master/Home.jpg)
+![Home](https://github.com/maciejdarlak/LiquorStore/blob/master/Menu.jpg)
