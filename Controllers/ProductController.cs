@@ -25,5 +25,16 @@ namespace LiquorStore.Controllers
             var model = await _context.Product.OrderBy(p => p.Id).Where(p => subcategory == null || p.SubCategory == subcategory).ToListAsync();                  
             return View(model);
         }
+
+        public async Task<IActionResult> SearchList(string searchString)
+        {
+            var products = _context.Product.Select(x => x);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(x => x.Name.Contains(searchString));
+            }
+            return View(await products.ToListAsync());
+        }
     }
 }
