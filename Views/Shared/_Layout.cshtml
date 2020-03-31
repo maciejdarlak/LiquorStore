@@ -49,17 +49,26 @@
 
                 <div class="col-md-3">
                     <li class="navbar-form navbar-right">
-                        <form div class="form-group" asp-controller="Product" asp-action="SearchList">
-                            <input type="text" class="form-control" name="SearchString">
+                        <form div class="form-group" asp-controller="Product" asp-action="SearchList" method="get">
+                            <!--method get - search result is viisible in URL-->
+                            <input type="text" class="form-control" name="SearchString" placeholder="Search">
                             <button class="btn btn-default" type="submit">
-                                <a class="glyphicon glyphicon-search"></a>
+                                <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </form>
                     </li>
                 </div>
 
+                <div class="col-md-2">
+                    <li class="navbar-form navbar-right">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                        </button>
+                    </li>
+                </div>
+
             </div>
-        </div>
+         </div>
     </nav>
 
     <div class="container">
