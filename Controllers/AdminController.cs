@@ -20,7 +20,7 @@ namespace LiquorStore.Controllers
         }
 
         // GET: Admin
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> AdminList()
         {
             return View(await _context.Product.ToListAsync());
         }
@@ -60,7 +60,7 @@ namespace LiquorStore.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AdminList));
             }
             return View(product);
         }
@@ -111,7 +111,7 @@ namespace LiquorStore.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AdminList));
             }
             return View(product);
         }
@@ -142,7 +142,7 @@ namespace LiquorStore.Controllers
             var product = await _context.Product.FindAsync(id);
             _context.Product.Remove(product);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AdminList));
         }
 
         private bool ProductExists(int id)
