@@ -42,11 +42,11 @@ namespace LiquorStore.Models
         {
             get { return CartItems; }
         }
-    }
 
-    public class CartItem
-    {
-        public Product Product { get; set; }
-        public int Quantity { get; set; }
+        public class CartItem
+        {
+            public Product Product { get; set; }
+            public int Quantity { get; set; }
+        }
     }
 }
