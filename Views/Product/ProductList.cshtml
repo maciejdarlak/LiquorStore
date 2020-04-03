@@ -35,29 +35,34 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <th>
+                    <td>
                         @Html.DisplayFor(modelitem => item.Name)
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelitem => item.Category)
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelitem => item.SubCategory)
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelitem => item.Volume)
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelitem => item.ProductionYear)
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelitem => item.Price)
-                    </th>
-                    <th>
-                        <div class="pull-right">
-                            <input type="submit" class="btn btn-success" value="Add to cart" /> 
-                        </div>
-                    </th>
+                    </td>
+
+                    <td>
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            <div class="pull-right">
+                                <input type="submit" class="btn btn-success" value="Add to cart" />
+                            </div>
+                        }
+                    </td>
+
                 </tr>
             }
 
