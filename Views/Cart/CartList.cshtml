@@ -1,7 +1,35 @@
-﻿
+﻿@model LiquorStore.Models.Cart
+
 @{
     ViewData["Title"] = "CartList";
 }
 
 <h1>CartList</h1>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model.CartItemsReview)
+            {
+                <tr>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.Id</td>
+                    <td>@item.Product.Price.ToString("c")</td>
+                    <td>@(item.Quantity * item.Product.Price).ToString("c")</td>
+                </tr>
+            }
+        }
+        <div class="text-center">
+            <a class="btn btn-primary" href="Url.Return"> </a>
+        </div>
+    </tbody>
+</table>
