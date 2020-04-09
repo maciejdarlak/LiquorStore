@@ -42,15 +42,14 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
+        public async Task<IActionResult> CartList()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Summary(Cart cart )
         {
             return View(cart);
-        }
-
-        public async Task<IActionResult> AdminList(Cart cart)
-        {
-            IEnumerable<Product> products = await _Context.Product.Select(x => x).ToListAsync();
-            return RedirectToAction("CartList");
         }
     }
 }

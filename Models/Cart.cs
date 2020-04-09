@@ -10,6 +10,12 @@ namespace LiquorStore.Models
 {
     public class Cart
     {
+        public class CartItem
+        {
+            public Product Product { get; set; }
+            public int Quantity { get; set; }
+        }
+
         private List<CartItem> CartItems = new List<CartItem>();  //CartItem = Product * x       
 
         public void AddItem(Product product, int quantity)
@@ -41,12 +47,6 @@ namespace LiquorStore.Models
         public IEnumerable<CartItem> CartItemsReview
         {
             get { return CartItems; }
-        }
-
-        public class CartItem
-        {
-            public Product Product { get; set; }
-            public int Quantity { get; set; }
         }
     }
 }
