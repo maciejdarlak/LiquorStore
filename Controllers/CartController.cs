@@ -22,7 +22,7 @@ namespace LiquorStore.Controllers
 
         public async Task<IActionResult> CartList(Cart cart)
         {
-            return View (new CartListViewModel { Cart = cart });
+            return View (new CartListViewModel { Cart = GetCart(cart) });
         }
 
         public async Task<IActionResult> AddToCart(int productId, Cart cart)
@@ -49,6 +49,13 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-
+        public Cart GetCart(Cart cart)
+        {
+            if (cart == null)
+            {
+                cart = new Cart();
+            }
+            return cart;
+        }
     }
 }
