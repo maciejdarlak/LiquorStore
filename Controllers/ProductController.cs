@@ -20,7 +20,7 @@ namespace LiquorStore.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> ProductList(string subcategory)
+        public async Task<IActionResult> ProductList(string subcategory) //Finding one particular subcategory according with parameter
         {
             var model = await _context.Product.OrderBy(p => p.Id).Where(p => subcategory == null || p.SubCategory == subcategory).ToListAsync();                  
             return View(model);

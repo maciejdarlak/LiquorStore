@@ -5,16 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LiquorStore.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace LiquorStore.Models
 {
     public class Cart
     {
-        public class CartItem
-        {
-            public Product Product { get; set; }
-            public int Quantity { get; set; }
-        }
+        public string CartId { get; set; }
 
         private List<CartItem> CartItems = new List<CartItem>();  //CartItem = Product * x       
 
@@ -46,7 +45,14 @@ namespace LiquorStore.Models
 
         public IEnumerable<CartItem> CartItemsReview
         {
-            get { return CartItems; }
+           get { return CartItems; } 
+        }
+
+        public class CartItem
+        {
+            public string CartId { get; set; }
+            public Product Product { get; set; }
+            public int Quantity { get; set; }
         }
     }
 }

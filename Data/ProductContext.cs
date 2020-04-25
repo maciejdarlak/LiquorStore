@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;  //The Nuget package Manager file has been downloaded
 using LiquorStore.Models;
 
+
 namespace LiquorStore.Data
 {
     public class ProductContext : DbContext

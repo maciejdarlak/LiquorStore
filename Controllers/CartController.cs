@@ -6,21 +6,28 @@ using Microsoft.AspNetCore.Mvc;
 using LiquorStore.Models;
 using LiquorStore.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace LiquorStore.Controllers
 {
     public class CartController : Controller
     {
-        readonly private ProductContext _Context;
-        public CartController(ProductContext Context)
+        readonly private ProductContext _context;
+        public CartController(ProductContext context)
         {
-            _Context = Context;
+            _context = context;
         }
 
-        public async Task<IActionResult> AddToCart(Cart cart, int productId)
+        public async Task<IActionResult> CartList(Cart cart)
         {
-            Product product = await _Context.Product.FirstOrDefaultAsync(x => x.Id == productId);
+            return View (new CartListViewModel { Cart = cart });
+        }
+
+        public async Task<IActionResult> AddToCart(int productId, Cart cart)
+        {
+            Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
 
             if (product != null)
             {
@@ -30,9 +37,9 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-        public async Task<IActionResult> RemoveFromCart(Cart cart, int productId)
+        public async Task<IActionResult> RemoveFromCart(int productId, Cart cart)
         {
-            Product product = await _Context.Product.FirstOrDefaultAsync(x => x.Id == productId);
+            Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
 
             if (product != null)
             {
@@ -42,14 +49,6 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-        public async Task<IActionResult> CartList()
-        {
-            return View();
-        }
 
-        public async Task<IActionResult> Summary(Cart cart )
-        {
-            return View(cart);
-        }
     }
 }

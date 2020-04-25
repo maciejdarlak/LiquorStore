@@ -23,7 +23,7 @@
                         <a asp-controller="Home" asp-action="Contact" class="navbar-brand"> Contact </a>
                         <li class="dropdown">
                             <a asp-controller="Product" asp-action="ProductList"
-                               class="navbar-brand dropdown-toggle" data-toggle="dropdown">Spirits<b class="caret"></b></a>
+                               class="navbar-brand dropdown-toggle" data-toggle="dropdown">Spirits<b class="caret"></b></a> 
                             <ul class="dropdown-menu">
                                 <li><a>@await Component.InvokeAsync("SpiritsSubCategoryNavigation")</a></li>
                             </ul>
