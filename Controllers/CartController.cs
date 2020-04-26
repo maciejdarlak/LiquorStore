@@ -20,37 +20,38 @@ namespace LiquorStore.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> CartList(Cart cart)
+        public async Task<IActionResult> CartList()
         {
-            return View (new CartListViewModel { Cart = GetCart(cart) });
+            return View (new CartListViewModel { Cart = GetCart() });
         }
 
-        public async Task<IActionResult> AddToCart(int productId, Cart cart)
+        public async Task<IActionResult> AddToCart(int productId)
         {
             Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
 
             if (product != null)
             {
-                cart.AddItem(product, 1);
+                GetCart().AddItem(product, 1);
             }
 
             return RedirectToAction("CartList");
         }
 
-        public async Task<IActionResult> RemoveFromCart(int productId, Cart cart)
+        public async Task<IActionResult> RemoveFromCart(int productId)
         {
             Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
 
             if (product != null)
             {
-                cart.RemoveItem(product);
+                GetCart().RemoveItem(product);
             }
 
             return RedirectToAction("CartList");
         }
 
-        public Cart GetCart(Cart cart)
+        public Cart GetCart()
         {
+            Cart cart = null;
             if (cart == null)
             {
                 cart = new Cart();

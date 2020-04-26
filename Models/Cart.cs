@@ -13,19 +13,17 @@ namespace LiquorStore.Models
 {
     public class Cart
     {
-        public string CartId { get; set; }
-
         private List<CartItem> CartItems = new List<CartItem>();  //CartItem = Product * x       
 
         public void AddItem(Product product, int quantity)
         {
-            CartItem cartItem = CartItems.Where(x => x.Product.Id == product.Id).FirstOrDefault();  //Products comparison
+            CartItem cartItem = CartItems.Where(x => x.Product.Id == product.Id).FirstOrDefault();  //Product search from parameter
 
-            if (CartItems == null)
+            if (cartItem == null) //Product from parameter does not exist in Cart, so has to be created new object in the CartItems list
             {
                 CartItems.Add(new CartItem { Product = product, Quantity = quantity });
             }
-            else
+            else //The product exist in Cart (as an object) so just add a new quantity
             {
                 cartItem.Quantity += quantity;
             }
@@ -49,8 +47,7 @@ namespace LiquorStore.Models
         }
 
         public class CartItem
-        {
-            public string CartId { get; set; }
+        {           
             public Product Product { get; set; }
             public int Quantity { get; set; }
         }
