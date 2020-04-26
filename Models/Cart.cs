@@ -15,9 +15,9 @@ namespace LiquorStore.Models
     {
         private List<CartItem> CartItems = new List<CartItem>();  //CartItem = Product * x       
 
-        public void AddItem(Product product, int quantity)
+        public void AddItem(Product product, int quantity) //The method adds a single product from the parameter 
         {
-            CartItem cartItem = CartItems.Where(x => x.Product.Id == product.Id).FirstOrDefault();  //Product search from parameter
+            CartItem cartItem = CartItems.Where(x => x.Product.Id == product.Id).FirstOrDefault(); //Product search from parameter
 
             if (cartItem == null) //Product from parameter does not exist in Cart, so has to be created new object in the CartItems list
             {

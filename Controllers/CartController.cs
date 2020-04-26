@@ -25,13 +25,13 @@ namespace LiquorStore.Controllers
             return View (new CartListViewModel { Cart = GetCart() });
         }
 
-        public async Task<IActionResult> AddToCart(int productId)
+        public async Task<IActionResult> AddToCart(int productId) //The method checks if the product from the parameter is in the database
         {
             Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
 
             if (product != null)
             {
-                GetCart().AddItem(product, 1);
+                GetCart().AddItem(product, 1); //As it is added using the Cart class method
             }
 
             return RedirectToAction("CartList");
@@ -51,7 +51,6 @@ namespace LiquorStore.Controllers
 
         public Cart GetCart()
         {
-            Cart cart = null;
             if (cart == null)
             {
                 cart = new Cart();
