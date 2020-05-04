@@ -37,7 +37,8 @@ namespace LiquorStore
 
             services.AddControllersWithViews();
             // !!!!!!!!!!!!!!!!!!!   Registration of connection with DB, method UseSqlServer() is contained in DbContextOptions.
-            services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductContext")));
+            services.AddDbContext<ProductContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("ProductContext")));
 
         }
 

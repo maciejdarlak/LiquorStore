@@ -19,7 +19,7 @@ namespace LiquorStore.Models
         {
             CartItem cartItem = CartItems.Where(x => x.Product.Id == product.Id).FirstOrDefault(); //Product search from parameter
 
-            if (cartItem == null) //Product from parameter does not exist in Cart, so has to be created new object in the CartItems list
+            if (cartItem == null) //Product from parameter does not exist in Cart, so it has to be created new object in the CartItems list
             {
                 CartItems.Add(new CartItem { Product = product, Quantity = quantity });
             }
