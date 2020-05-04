@@ -15,14 +15,18 @@ namespace LiquorStore.Controllers
     public class CartController : Controller
     {
         readonly private ProductContext _context;
-        public CartController(ProductContext context)
+        readonly private Cart _cart;
+
+        public CartController(ProductContext context, Cart cart)
         {
             _context = context;
+            _cart = cart;
         }
 
-        public async Task<IActionResult> CartList()
+        public async Task<IActionResult> CartList(Cart cart)
         {
-            return View (new CartListViewModel { Cart = GetCart() });
+            var cartList = new CartListViewModel { Cart = GetCart() };  
+            return View(cartList);
         }
 
         public async Task<IActionResult> AddToCart(int productId) //The method checks if the product from the parameter is in the database
@@ -37,7 +41,7 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-        public async Task<IActionResult> RemoveFromCart(int productId)
+        public async Task<IActionResult> RemoveFromCart(int productId, Cart cart)
         {
             Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
 
@@ -49,13 +53,23 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-        public Cart GetCart()
+        private Cart GetCart()
         {
+            Cart cart = new Cart();
+            var sesionValue = HttpContext.Session.GetString("Cart");
+
+            var sessionObj = value == null ? default(Cart) : JsonConvert.DeserializeObject<Cart>(sesionValue);
+
             if (cart == null)
             {
                 cart = new Cart();
             }
-            return cart;
+            return cart(sessionObj);
+        }
+
+        public async Task<List<Cart.CartItem>> GetCartItemsAsync()
+        {
+            return _cart.CartItems ?? (_cart.CartItems = await _cart.CartItems.Where(x => x.Product.Id == Product.Id));
         }
     }
 }
