@@ -13,7 +13,8 @@ namespace LiquorStore.Models
 {
     public class Cart
     {
-        private List<CartItem> CartItems = new List<CartItem>();  //CartItem = Product * x       
+
+        public List<CartItem> CartItems = new List<CartItem>();  //CartItem = Product * x       
 
         public void AddItem(Product product, int quantity) //The method adds a single product from the parameter 
         {

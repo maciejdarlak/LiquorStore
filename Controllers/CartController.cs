@@ -8,6 +8,7 @@ using LiquorStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 
 namespace LiquorStore.Controllers
@@ -55,21 +56,9 @@ namespace LiquorStore.Controllers
 
         private Cart GetCart()
         {
-            Cart cart = new Cart();
-            var sesionValue = HttpContext.Session.GetString("Cart");
-
-            var sessionObj = value == null ? default(Cart) : JsonConvert.DeserializeObject<Cart>(sesionValue);
-
-            if (cart == null)
-            {
-                cart = new Cart();
-            }
-            return cart(sessionObj);
-        }
-
-        public async Task<List<Cart.CartItem>> GetCartItemsAsync()
-        {
-            return _cart.CartItems ?? (_cart.CartItems = await _cart.CartItems.Where(x => x.Product.Id == Product.Id));
+            var sessionValue = HttpContext.Session.GetString("Cart");
+            var sessionObj = sessionValue == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sessionValue);
+            return sessionObj;
         }
     }
 }
