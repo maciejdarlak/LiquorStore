@@ -16,12 +16,11 @@ namespace LiquorStore.Controllers
     public class CartController : Controller
     {
         readonly private ProductContext _context;
-        readonly private Cart _cart;
 
-        public CartController(ProductContext context, Cart cart)
+
+        public CartController(ProductContext context)
         {
             _context = context;
-            _cart = cart;
         }
 
         public async Task<IActionResult> CartList(Cart cart)
@@ -30,7 +29,7 @@ namespace LiquorStore.Controllers
             return View(cartList);
         }
 
-        public async Task<IActionResult> AddToCart(int productId) //The method checks if the product from the parameter is in the database
+        public async Task<IActionResult> AddToCart(int productId, Cart cart) //The method checks if the product from the parameter is in the database
         {
             Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
 
