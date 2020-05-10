@@ -10,6 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using LiquorStore.Data;  //It must be added
 using Microsoft.EntityFrameworkCore;  //It must be added
+using LiquorStore.Models;
+using LiquorStore.Controllers;
+using LiquorStore.Repositories;
 
 
 namespace LiquorStore
@@ -26,6 +29,10 @@ namespace LiquorStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
+            services.AddScoped<ICart, Cart>();
+
             //Session
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
@@ -35,7 +42,8 @@ namespace LiquorStore
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews();          
+
             // !!!!!!!!!!!!!!!!!!!   Registration of connection with DB, method UseSqlServer() is contained in DbContextOptions.
             services.AddDbContext<ProductContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("ProductContext")));
