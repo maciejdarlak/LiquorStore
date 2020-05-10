@@ -9,18 +9,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using LiquorStore.Repositories;
 
 
 namespace LiquorStore.Controllers
 {
     public class CartController : Controller
     {
-        readonly private ProductContext _context;
+        private readonly ProductContext _context;
+        private readonly ICart _cart;
 
-
-        public CartController(ProductContext context)
+        public CartController(ProductContext context, ICart cart)
         {
             _context = context;
+            _cart = cart;
         }
 
         public async Task<IActionResult> CartList(Cart cart)
