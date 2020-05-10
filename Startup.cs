@@ -12,7 +12,7 @@ using LiquorStore.Data;  //It must be added
 using Microsoft.EntityFrameworkCore;  //It must be added
 using LiquorStore.Models;
 using LiquorStore.Controllers;
-using LiquorStore.Repositories;
+using LiquorStore.Abstract;
 
 
 namespace LiquorStore
