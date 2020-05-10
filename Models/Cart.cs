@@ -7,7 +7,7 @@ using LiquorStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using LiquorStore.Repositories;
+using LiquorStore.Abstract;
 
 
 namespace LiquorStore.Models
