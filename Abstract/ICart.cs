@@ -9,5 +9,7 @@ namespace LiquorStore.Abstract
     public interface ICart
     {
         public void AddItem(Product product, int quantity);
+        public void RemoveItem(Product product);
+
     }
 }
