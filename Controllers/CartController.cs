@@ -19,21 +19,21 @@ namespace LiquorStore.Controllers
         private readonly ProductContext _context;
         private readonly ICart _cart;
 
-        public CartController(ProductContext context, ICart cart)
+        public CartController(ProductContext context, ICart cart) //Depedency Injection - services.AddScoped<ICart, Cart>() in Startup
         {
             _context = context;
             _cart = cart;
         }
 
-        public async Task<IActionResult> CartList(Cart cart)
+        public async Task<IActionResult> CartList()
         {
             var cartList = new CartListViewModel { Cart = GetCart() };  
             return View(cartList);
         }
 
-        public async Task<IActionResult> AddToCart(int productId, Cart cart) //The method checks if the product from the parameter is in the database
+        public async Task<IActionResult> AddToCart(int Id) //The method checks if the product from the parameter is in the database
         {
-            Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
+            Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (product != null)
             {
@@ -43,9 +43,9 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-        public async Task<IActionResult> RemoveFromCart(int productId, Cart cart)
+        public async Task<IActionResult> RemoveFromCart(int Id)
         {
-            Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
+            Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (product != null)
             {
@@ -57,9 +57,14 @@ namespace LiquorStore.Controllers
 
         private Cart GetCart()
         {
-            var sessionValue = HttpContext.Session.GetString("Cart");
-            var sessionObj = sessionValue == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sessionValue);
+            Cart sessionValue = new Cart();
+
+            HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(sessionValue));
+
+            var sesionValue = HttpContext.Session.GetString("Cart");       
+            var sessionObj = sessionValue == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sesionValue);
             return sessionObj;
         }
     }
 }
+

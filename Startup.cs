@@ -31,7 +31,7 @@ namespace LiquorStore
         {
             services.AddControllers();
 
-            services.AddScoped<ICart, Cart>();
+            services.AddScoped<ICart, Cart>();  //Depedency Injection, Icart --> Cart
 
             //Session
             services.AddDistributedMemoryCache();

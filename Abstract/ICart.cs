@@ -10,6 +10,6 @@ namespace LiquorStore.Abstract
     {
         public void AddItem(Product product, int quantity);
         public void RemoveItem(Product product);
-
+        public void RemoveAll();
     }
 }
