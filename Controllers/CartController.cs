@@ -27,7 +27,7 @@ namespace LiquorStore.Controllers
 
         public async Task<IActionResult> CartList()
         {
-            var cartList = new CartListViewModel { Cart = GetCart() };  
+            var cartList = new CartListViewModel { cart = GetCart() };  
             return View(cartList);
         }
 

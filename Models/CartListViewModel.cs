@@ -9,6 +9,6 @@ namespace LiquorStore.Models
 {
     public class CartListViewModel
     {
-        public Cart Cart { get; set; }
+        public Cart cart { get; set; }
     }
 }
