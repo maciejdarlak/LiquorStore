@@ -55,13 +55,16 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-        private Cart GetCart()
+        private ICart GetCart()
         {
+            if (_cart != null)
+                return _cart;
+
             Cart sessionValue = new Cart();
 
             HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(sessionValue));
 
-            var sesionValue = HttpContext.Session.GetString("Cart");       
+            var sesionValue = HttpContext.Session.GetString("Cart");
             var sessionObj = sessionValue == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sesionValue);
             return sessionObj;
         }

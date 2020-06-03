@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LiquorStore.Models;
+using LiquorStore.Abstract;
 
 
 namespace LiquorStore.Models
 {
     public class CartListViewModel
     {
-        public Cart cart { get; set; }
+        public ICart cart { get; set; }
     }
 }
