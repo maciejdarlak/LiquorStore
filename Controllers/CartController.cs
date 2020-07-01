@@ -17,7 +17,7 @@ namespace LiquorStore.Controllers
     {
         private readonly ProductContext _context;
 
-        public CartController(ProductContext context) //Depedency Injection - services.AddScoped<ICart, Cart>() in Startup
+        public CartController(ProductContext context) //Depedency Injection
         {
             _context = context;
         }
@@ -56,7 +56,12 @@ namespace LiquorStore.Controllers
         {
             var session = HttpContext.Session.GetString("Cart");
 
-            if (session == null)
+            if (session !== null)
+            {
+                var sessionObj = session == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(session);
+                return sessionObj;
+            }
+            else
             {
                 Cart value = new Cart();
                 // Adding a session object.
@@ -65,11 +70,6 @@ namespace LiquorStore.Controllers
                 // Getting a session object.
                 var sessionValue = HttpContext.Session.GetString("Cart");
                 var sessionObj = value == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sessionValue); // DeserializeObject method converts JSON into .NET objects (<Cart>.
-                return sessionObj;
-            }
-            else
-            {
-                var sessionObj = session == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(session);
                 return sessionObj;
             }    
         }
