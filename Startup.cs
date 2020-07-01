@@ -12,7 +12,6 @@ using LiquorStore.Data;  //It must be added
 using Microsoft.EntityFrameworkCore;  //It must be added
 using LiquorStore.Models;
 using LiquorStore.Controllers;
-using LiquorStore.Abstract;
 
 
 namespace LiquorStore
@@ -30,8 +29,6 @@ namespace LiquorStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            services.AddScoped<ICart, Cart>();  //Depedency Injection, Icart --> Cart
 
             //Session
             services.AddDistributedMemoryCache();

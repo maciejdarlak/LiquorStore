@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using LiquorStore.Abstract;
 
 
 namespace LiquorStore.Controllers
@@ -17,12 +16,10 @@ namespace LiquorStore.Controllers
     public class CartController : Controller
     {
         private readonly ProductContext _context;
-        private readonly ICart _cart;
 
-        public CartController(ProductContext context, ICart cart) //Depedency Injection - services.AddScoped<ICart, Cart>() in Startup
+        public CartController(ProductContext context) //Depedency Injection - services.AddScoped<ICart, Cart>() in Startup
         {
             _context = context;
-            _cart = cart;
         }
 
         public async Task<IActionResult> CartList()
@@ -55,18 +52,26 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-        private ICart GetCart()
+        private Cart GetCart()
         {
-            if (_cart != null)
-                return _cart;
+            var session = HttpContext.Session.GetString("Cart");
 
-            Cart sessionValue = new Cart();
+            if (session == null)
+            {
+                Cart value = new Cart();
+                // Adding a session object.
+                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(value)); // SerializeObject method converts .NET objects into their JSON equivalent.
 
-            HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(sessionValue));
-
-            var sesionValue = HttpContext.Session.GetString("Cart");
-            var sessionObj = sessionValue == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sesionValue);
-            return sessionObj;
+                // Getting a session object.
+                var sessionValue = HttpContext.Session.GetString("Cart");
+                var sessionObj = value == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sessionValue); // DeserializeObject method converts JSON into .NET objects (<Cart>.
+                return sessionObj;
+            }
+            else
+            {
+                var sessionObj = session == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(session);
+                return sessionObj;
+            }    
         }
     }
 }

@@ -7,12 +7,11 @@ using LiquorStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using LiquorStore.Abstract;
 
 
 namespace LiquorStore.Models
 {
-    public class Cart : ICart
+    public class Cart
     {
 
         public List<CartItem> CartItems = new List<CartItem>();  //CartItem = Product * x       
