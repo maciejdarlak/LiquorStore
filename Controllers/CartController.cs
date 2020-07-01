@@ -56,7 +56,7 @@ namespace LiquorStore.Controllers
         {
             var session = HttpContext.Session.GetString("Cart");
 
-            if (session !== null)
+            if (session != null)
             {
                 var sessionObj = session == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(session);
                 return sessionObj;
