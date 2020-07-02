@@ -22,7 +22,7 @@ namespace LiquorStore.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> CartList()
+        public IActionResult CartList()
         {
             var cartList = new CartListViewModel { cart = GetCart() };  
             return View(cartList);
