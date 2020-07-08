@@ -12,7 +12,7 @@ using LiquorStore.Data;  //It must be added
 using Microsoft.EntityFrameworkCore;  //It must be added
 using LiquorStore.Models;
 using LiquorStore.Controllers;
-
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace LiquorStore
 {
@@ -39,7 +39,8 @@ namespace LiquorStore
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddControllersWithViews();          
+            services.AddControllersWithViews().AddSessionStateTempDataProvider(); // AddSessionStateTempDataProvider - adding possiblity using tempdata between Controllers.
+            services.AddRazorPages().AddSessionStateTempDataProvider(); // This line is connected to the line above. 
 
             // !!!!!!!!!!!!!!!!!!!   Registration of connection with DB, method UseSqlServer() is contained in DbContextOptions.
             services.AddDbContext<ProductContext>(options => 
