@@ -35,7 +35,8 @@ namespace LiquorStore.Controllers
 
             if (product != null)
             {
-                GetCart().AddItem(product, 1); ; //As it is added using the Cart class method               
+                Cart data = GetCart().AddItem(product, 1); //As it is added using the Cart class method       
+                TempData["data"] = data;
             }
 
             return RedirectToAction("CartList");
@@ -71,7 +72,6 @@ namespace LiquorStore.Controllers
                 // Getting a session object.
                 var sessionValue = HttpContext.Session.GetString("Cart");
                 var sessionObj = value == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sessionValue); // DeserializeObject method converts JSON into .NET objects (<Cart>.
-                TempData["data"] = sessionObj;
                 return sessionObj;
             }    
         }
