@@ -35,7 +35,7 @@ namespace LiquorStore.Controllers
 
             if (product != null)
             {
-                Cart data = GetCart().AddItem(product, 1); //As it is added using the Cart class method       
+                var data = GetCart().AddItem(product, 1); //As it is added using the Cart class method         
                 TempData["data"] = data;
             }
 
@@ -54,7 +54,7 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-        private Cart GetCart()
+        private Cart GetCart() //Session
         {
             var session = HttpContext.Session.GetString("Cart");
 
@@ -67,11 +67,11 @@ namespace LiquorStore.Controllers
             {
                 Cart value = new Cart();
                 // Adding a session object.
-                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(value)); // SerializeObject method converts .NET objects into their JSON equivalent.
+                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(value)); //SerializeObject method converts .NET objects into their JSON equivalent
 
-                // Getting a session object.
+                // Getting a session object
                 var sessionValue = HttpContext.Session.GetString("Cart");
-                var sessionObj = value == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sessionValue); // DeserializeObject method converts JSON into .NET objects (<Cart>.
+                var sessionObj = value == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sessionValue); //DeserializeObject method converts JSON into .NET objects (<Cart>
                 return sessionObj;
             }    
         }

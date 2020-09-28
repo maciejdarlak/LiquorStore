@@ -32,15 +32,15 @@ namespace LiquorStore
 
             //Session
             services.AddDistributedMemoryCache();
+
+            services.AddControllersWithViews().AddSessionStateTempDataProvider(); // AddSessionStateTempDataProvider - adding possiblity using tempdata between Controllers.
+            services.AddRazorPages().AddSessionStateTempDataProvider(); // This line is connected to the line above. 
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
-            });
-
-            services.AddControllersWithViews().AddSessionStateTempDataProvider(); // AddSessionStateTempDataProvider - adding possiblity using tempdata between Controllers.
-            services.AddRazorPages().AddSessionStateTempDataProvider(); // This line is connected to the line above. 
+            });           
 
             // !!!!!!!!!!!!!!!!!!!   Registration of connection with DB, method UseSqlServer() is contained in DbContextOptions.
             services.AddDbContext<ProductContext>(options => 
