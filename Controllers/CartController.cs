@@ -25,20 +25,15 @@ namespace LiquorStore.Controllers
         public IActionResult CartList()
         {
             var cartList = new CartListViewModel { cart = GetCart() };
-            cartList = (CartListViewModel)TempData["data"];
             return View(cartList);
         }
 
         public async Task<IActionResult> AddToCart(int Id) //The method checks if the product from the parameter is in the database
         {
             Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == Id);
-
-            if (product != null)
-            {
-                var data = GetCart().AddItem(product, 1); //As it is added using the Cart class method         
-                TempData["data"] = data;
-            }
-
+            var cart = GetCart();
+            cart.AddItem(product, 1);
+            HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart)); //To string type
             return RedirectToAction("CartList");
         }
 
@@ -56,24 +51,9 @@ namespace LiquorStore.Controllers
 
         private Cart GetCart() //Session
         {
-            var session = HttpContext.Session.GetString("Cart");
-
-            if (session != null)
-            {
-                var sessionObj = session == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(session);
-                return sessionObj;
-            }
-            else
-            {
-                Cart value = new Cart();
-                // Adding a session object.
-                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(value)); //SerializeObject method converts .NET objects into their JSON equivalent
-
-                // Getting a session object
-                var sessionValue = HttpContext.Session.GetString("Cart");
-                var sessionObj = value == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(sessionValue); //DeserializeObject method converts JSON into .NET objects (<Cart>
-                return sessionObj;
-            }    
+            var session_cart = HttpContext.Session.GetString("Cart");
+            var cart = session_cart != null ? JsonConvert.DeserializeObject<Cart>(session_cart) : new Cart(); //To object type
+            return cart;
         }
     }
 }
