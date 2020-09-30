@@ -19,13 +19,13 @@
     <tbody>
         @if (Model != null)
         {
-            @foreach (var item in Model.cart.CartItemsReview)
+            @foreach (var item in Model.cart.CartItems)
             {
                 <tr>
                     <td>@item.Quantity</td>
-                    <td>@item.Product.Id</td>
+                    <td>@item.Product.Name</td>
                     <td>@item.Product.Price.ToString("c")</td>
-                    <td>@(item.Quantity * item.Product.Price).ToString("c")</td>
+                    <td>@((item.Quantity * item.Product.Price).ToString("c"))</td>
                 </tr>
             }
         }
