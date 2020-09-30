@@ -37,7 +37,7 @@ namespace LiquorStore
             services.AddRazorPages().AddSessionStateTempDataProvider(); // This line is connected to the line above. 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(120);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });           
