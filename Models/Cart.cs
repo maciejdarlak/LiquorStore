@@ -13,7 +13,6 @@ namespace LiquorStore.Models
 {
     public class Cart
     {
-
         public List<CartItem> CartItems = new List<CartItem>();  //CartItem = Product * x       
 
         public void AddItem(Product product, int quantity) //The method adds a single product from the parameter 
@@ -22,7 +21,7 @@ namespace LiquorStore.Models
 
             if (cartItem == null) //Product from parameter does not exist in Cart, so it has to be created new object in the CartItems list
             {
-                CartItems.Add(new CartItem { Product = product, Quantity = quantity });
+                CartItems.Add( new CartItem { Product = product, Quantity = quantity });
             }
             else //The product exist in Cart (as an object) so just add a new quantity
             {
@@ -41,16 +40,16 @@ namespace LiquorStore.Models
         {
             CartItems.Clear();
         }
+    }
 
-        public IEnumerable<CartItem> CartItemsReview
+    [Serializable]
+    public class CartItem
+    {
+        public CartItem()
         {
-           get { return CartItems; } 
-        }
 
-        public class CartItem
-        {           
-            public Product Product { get; set; }
-            public int Quantity { get; set; }
         }
+        public Product Product { get; set; }
+        public int Quantity { get; set; }
     }
 }
