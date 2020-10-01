@@ -36,7 +36,7 @@ namespace LiquorStore.Controllers
             {
                 var cart = GetCart();
                 cart.AddItem(product, 1);
-                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart)); //To string type
+                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart)); //Converts object to json 
             }
 
             return RedirectToAction("CartList");
@@ -54,10 +54,10 @@ namespace LiquorStore.Controllers
             return RedirectToAction("CartList");
         }
 
-        private Cart GetCart() //Session
+        private Cart GetCart() //Session - returns a cart object - full (JsonConvert.DeserializeObject<Cart>(session_cart)) OR empty (new Cart())
         {
             var session_cart = HttpContext.Session.GetString("Cart");
-            var cart = session_cart != null ? JsonConvert.DeserializeObject<Cart>(session_cart) : new Cart(); //To object type
+            var cart = session_cart != null ? JsonConvert.DeserializeObject<Cart>(session_cart) : new Cart(); //Converts json to object
             return cart;
         }
     }
