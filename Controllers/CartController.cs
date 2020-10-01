@@ -34,7 +34,7 @@ namespace LiquorStore.Controllers
 
             if (product != null)
             {
-                var cart = GetCart();
+                var cart = GetCart(); //Assignment of the session memory area
                 cart.AddItem(product, 1);
                 HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart)); //Converts object to json 
             }
