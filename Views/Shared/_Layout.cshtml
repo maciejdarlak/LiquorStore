@@ -8,22 +8,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-
 <body>
-
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="row">
-
                 <div class="col-md-2"></div>
-
                 <div class="col-md-4">
                     <ul class="nav navbar-nav">
                         <a asp-controller="Home" asp-action="Home" class="navbar-brand"> Home </a>
                         <a asp-controller="Home" asp-action="Contact" class="navbar-brand"> Contact </a>
                         <li class="dropdown">
                             <a asp-controller="Product" asp-action="ProductList"
-                               class="navbar-brand dropdown-toggle" data-toggle="dropdown">Spirits<b class="caret"></b></a> 
+                               class="navbar-brand dropdown-toggle" data-toggle="dropdown">Spirits<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a>@await Component.InvokeAsync("SpiritsSubCategoryNavigation")</a></li> <!--Folder "Components" then Vies/Shared/Components-->
                             </ul>
@@ -44,9 +40,7 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="col-md-1"></div>
-
                 <div class="col-md-3">
                     <li class="navbar-form navbar-right">
                         <form div class="form-group" asp-controller="Product" asp-action="SearchList" method="get">
@@ -58,9 +52,14 @@
                         </form>
                     </li>
                 </div>
-
-
-
+                <div class="col-md-2">
+                    <li class="navbar-form navbar-right">
+                        <button type="button" class="btn btn-default btn-sm">
+                        <a>@await Component.InvokeAsync("CartSummary")</a>
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                    </button>
+                    </li>
+                </div>
             </div>
          </div>
     </nav>
