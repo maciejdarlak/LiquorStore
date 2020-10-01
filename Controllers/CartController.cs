@@ -31,9 +31,14 @@ namespace LiquorStore.Controllers
         public async Task<IActionResult> AddToCart(int Id) //The method checks if the product from the parameter is in the database
         {
             Product product = await _context.Product.FirstOrDefaultAsync(x => x.Id == Id);
-            var cart = GetCart();
-            cart.AddItem(product, 1);
-            HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart)); //To string type
+
+            if (product != null)
+            {
+                var cart = GetCart();
+                cart.AddItem(product, 1);
+                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart)); //To string type
+            }
+
             return RedirectToAction("CartList");
         }
 
