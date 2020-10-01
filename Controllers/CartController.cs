@@ -48,7 +48,9 @@ namespace LiquorStore.Controllers
 
             if (product != null)
             {
+                var cart = GetCart();                                         
                 GetCart().RemoveItem(product);
+                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart);
             }
 
             return RedirectToAction("CartList");
