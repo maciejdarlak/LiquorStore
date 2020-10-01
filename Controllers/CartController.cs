@@ -50,7 +50,7 @@ namespace LiquorStore.Controllers
             {
                 var cart = GetCart();                                         
                 GetCart().RemoveItem(product);
-                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart);
+                HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
             }
 
             return RedirectToAction("CartList");
