@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace LiquorStore.Controllers
 {
@@ -48,7 +48,7 @@ namespace LiquorStore.Controllers
 
             if (product != null)
             {
-                var cart = GetCart();                                         
+                var cart = GetCart();
                 GetCart().RemoveItem(product);
                 HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
             }
@@ -61,6 +61,20 @@ namespace LiquorStore.Controllers
             var session_cart = HttpContext.Session.GetString("Cart");
             var cart = session_cart != null ? JsonConvert.DeserializeObject<Cart>(session_cart) : new Cart(); //Converts json to object
             return cart;
+        }
+
+        public decimal GetCartTotal() //Final amount
+        {
+            var sessionCart = GetCart().CartItems;
+            var total = sessionCart.Select(x => x.Product.Price * x.Quantity).Sum();
+            return total;
+        }
+
+        public int GetCartItemsNumber() //Cart products quantity
+        {
+            var getCartItemsNumber = GetCart().CartItems;
+            var total = getCartItemsNumber.Select(x => x.Quantity).Sum();
+            return total;
         }
     }
 }
