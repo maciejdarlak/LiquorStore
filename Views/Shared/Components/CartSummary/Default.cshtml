@@ -1,0 +1,12 @@
+﻿@model Cart
+
+@if (Model.CartItems.Count > 0)
+{
+<li>
+    <a asp-controller="Cart" asp-action="CartList">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+        <span id="cart-status">
+            @Model.CartItems.Count
+        </span>
+    </a>
+</li>}
