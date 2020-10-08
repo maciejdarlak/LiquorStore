@@ -63,14 +63,14 @@ namespace LiquorStore.Controllers
             return cart;
         }
 
-        public decimal GetCartTotal() //Final amount
+        public decimal GetCartTotal() //Final amount of session cart
         {
             var sessionCart = GetCart().CartItems;
             var total = sessionCart.Select(x => x.Product.Price * x.Quantity).Sum();
             return total;
         }
 
-        public int GetCartItemsNumber() //Cart products quantity
+        public int GetCartItemsNumber() //Cart products quantity of session cart
         {
             var getCartItemsNumber = GetCart().CartItems;
             var total = getCartItemsNumber.Select(x => x.Quantity).Sum();
