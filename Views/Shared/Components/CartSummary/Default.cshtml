@@ -1,4 +1,4 @@
-﻿@model Cart
+﻿@model Product
 
 @if (Model.CartItems.Count > 0)
 {
@@ -8,5 +8,8 @@
         <span id="cart-status">
             @Model.CartItems.Count
         </span>
+    </a>
+    <a asp-controller="Cart" asp-action="GetCartItemsNumber">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
     </a>
 </li>}

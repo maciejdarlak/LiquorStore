@@ -21,7 +21,7 @@ namespace LiquorStore.Components
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var cartSummary = await _context.Product.TakeAsync();
+            var cartSummary = await _context.Product.ToListAsync();
             return View(cartSummary);
         }
     }
