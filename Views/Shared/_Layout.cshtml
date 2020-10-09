@@ -55,9 +55,13 @@
                 <div class="col-md-2">
                     <li class="navbar-form navbar-right">
                         <button type="button" class="btn btn-default btn-sm">
-                        <a>@await Component.InvokeAsync("CartSummary")</a>
-                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                    </button>
+                            <a asp-controller="Cart" asp-action="CartList">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> <!--Cart icon-->
+                                <span id="cart-status">
+                                    <a asp-controller="Cart" asp-action="GetCartItemsNumber"></a>
+                                </span>
+                            </a>
+                        </button>
                     </li>
                 </div>
             </div>
