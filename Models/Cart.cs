@@ -7,7 +7,10 @@ using LiquorStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using LiquorStore.Models;
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace LiquorStore.Models
 {
@@ -39,6 +42,18 @@ namespace LiquorStore.Models
         public void RemoveAll()
         {
             CartItems.Clear();
+        }
+
+        public decimal GetTotal() //Final amount of session cart
+        {
+            var total = CartItems.Select(x => x.Product.Price * x.Quantity).Sum();
+            return total;
+        }
+
+        public int GetCartItemsNumber() //Cart products quantity of session cart
+        {
+            var total = CartItems.Select(x => x.Quantity).Sum();
+            return total;
         }
     }
 
